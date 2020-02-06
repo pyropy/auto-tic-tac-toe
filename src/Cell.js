@@ -1,9 +1,9 @@
 import React from "react";
 
-const Cell = ({ index, onClickHook, value }) => {
+const Cell = ({ index, onClickHook, value, winningCell }) => {
   return (
-    <div className={`cell ${value ? "taken " : null}`} onClick={_ => onClickHook(index)}>
-      <span>{value}</span>
+    <div className={`cell ${value ? "taken " : null} ${winningCell ? "won" : null}`} onClick={_ => onClickHook(index)}>
+      <p>{value}</p>
     </div>
   );
 };
