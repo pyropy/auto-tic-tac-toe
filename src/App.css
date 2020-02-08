@@ -20,7 +20,6 @@
 }
 
 .cell {
-  height: 300px;
   flex-basis: 33%;
   background: white;
   border: 1px solid black;
@@ -29,10 +28,22 @@
   font-size: 100px;
 }
 
+.inner-cell {
+  height: 300px;
+  position: relative;
+}
+
 .cell.taken {
   background: red;
 }
 
 .cell.won {
   background-color: green !important;
+}
+
+.timer {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 15px;
 }
