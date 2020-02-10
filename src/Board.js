@@ -43,7 +43,7 @@ const Board = () => {
   };
 
   const handleRobotMove = () => {
-    const timeout = setTimeout(() => {
+    const _ = setTimeout(() => {
       const move = bestMove(cells);
       onMove(move)
     }, 750);
@@ -53,7 +53,7 @@ const Board = () => {
     if (!isPlayerTurn) {
       handleRobotMove()
     }
-  }, [isPlayerTurn]);
+  }, []);
 
   return (
     <GameContext.Provider

@@ -25,7 +25,7 @@ function minimax(board, depth, isMaximizing) {
 
   if (winningCells !== null) {
     let winningPlayer = board[winningCells[0]]; // take first winning cell and find out player
-    return winningPlayer == robot ? 10 : -10;
+    return winningPlayer === robot ? 10 : -10;
   } else if (!board.includes(null)) {
     return 0;
   }
