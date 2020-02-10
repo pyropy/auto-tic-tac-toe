@@ -44,7 +44,7 @@ const Board = () => {
   };
 
   return (
-      <GameContext.Provider value={{ gameEnded: gameEnded, gameStart: gameStart}}>
+      <GameContext.Provider value={{ gameEnded: gameEnded, gameStart: gameStart, resetGame: resetGame}}>
         <div className="board-container">
           <div className="board">
             {cells.map((val, idx) => (
@@ -54,7 +54,6 @@ const Board = () => {
                 value={val}
                 winningCell={winningCells.includes(idx)}
                 onClickHook={onCellClick}
-                resetGameHook={resetGame}
               />
             ))}
           </div>
