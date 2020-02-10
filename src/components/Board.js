@@ -44,7 +44,7 @@ const Board = () => {
   };
 
   const handleRobotMove = () => {
-    const timeout = setTimeout(() => {
+    setTimeout(() => {
       const move = bestMove(cells);
       onMove(move)
     }, 750);
