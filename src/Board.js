@@ -22,7 +22,7 @@ const Board = () => {
   const onCellClick = index => {
     if (cells[index] || gameEnded) return;
 
-    cells[index] = isPlayerTurn ? "X" : "0";
+    cells[index] = isPlayerTurn ? "X" : "🤖";
     setCells([...cells]);
 
     const winningCells = calculateWinningCells(cells);
