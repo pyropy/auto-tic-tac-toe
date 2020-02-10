@@ -1,8 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Cell from "./Cell";
 import calculateWinningCells from "./helpers";
 import GameContext from "./contexts/GameContext";
+import { human, robot } from "./common";
+import bestMove from "./robot";
 
 const Board = () => {
   const [isPlayerTurn, setPlayerTurn] = useState(true);
@@ -19,10 +21,10 @@ const Board = () => {
     setGameStart(Date.now());
   };
 
-  const onCellClick = index => {
-    if (cells[index] || gameEnded) return;
+  const onMove = cellIndex => {
+    if (cells[cellIndex] || gameEnded) return;
 
-    cells[index] = isPlayerTurn ? "X" : "🤖";
+    cells[cellIndex] = isPlayerTurn ? human : robot;
     setCells([...cells]);
 
     const winningCells = calculateWinningCells(cells);
@@ -31,10 +33,8 @@ const Board = () => {
     } else if (!cells.includes(null)) {
       // if all cells are taken but no-one won
       // end the game (draw)
-      setGameEnded(true)
+      setGameEnded(true);
     }
-
-
     setPlayerTurn(!isPlayerTurn);
   };
 
@@ -43,22 +43,41 @@ const Board = () => {
     setGameEnded(true);
   };
 
+  const handleRobotMove = () => {
+    const timeout = setTimeout(() => {
+      const move = bestMove(cells);
+      onMove(move)
+    }, 750);
+  };
+
+  useEffect(() => {
+    if (!isPlayerTurn) {
+      handleRobotMove()
+    }
+  }, [isPlayerTurn]);
+
   return (
-      <GameContext.Provider value={{ gameEnded: gameEnded, gameStart: gameStart, resetGame: resetGame}}>
-        <div className="board-container">
-          <div className="board">
-            {cells.map((val, idx) => (
-              <Cell
-                key={idx}
-                index={idx}
-                value={val}
-                winningCell={winningCells.includes(idx)}
-                onClickHook={onCellClick}
-              />
-            ))}
-          </div>
+    <GameContext.Provider
+      value={{
+        gameEnded: gameEnded,
+        gameStart: gameStart,
+        resetGame: resetGame
+      }}
+    >
+      <div className="board-container">
+        <div className="board">
+          {cells.map((val, idx) => (
+            <Cell
+              key={idx}
+              index={idx}
+              value={val}
+              winningCell={winningCells.includes(idx)}
+              onClickHook={onMove}
+            />
+          ))}
         </div>
-      </GameContext.Provider>
+      </div>
+    </GameContext.Provider>
   );
 };
 
