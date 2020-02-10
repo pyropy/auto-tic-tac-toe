@@ -5,15 +5,15 @@ const Cell = ({ index, onClickHook, value, winningCell, resetGameHook }) => {
 
   const [resetedTimer, setResetedTimer] = useState(false);
 
-  const resetButton = (index === 4) ? <button className="reset-button" onClick={resetGameHook}>Reset Game</button> : <span></span>
-  const timer = (index === 4) ? <Timer reseted={resetedTimer} setReseted={setResetedTimer}/> : <span></span>
+  const resetButton = (index === 4) ? <button className="reset-button" onClick={resetGameHook}>Reset Game</button> :  null
+  const timer = (index === 4) ? <Timer reseted={resetedTimer} setReseted={setResetedTimer}/> : null
 
   return (
-    <div className={`cell ${value ? "taken" : ""} ${winningCell ? "won" : ""}`}>
-      {resetButton}
+    <div className={`cell${value ? " taken" : ""}${winningCell ? " won" : ""}`}>
       <div className="inner-cell" onClick={_ => onClickHook(index)}>
-        {timer}
+      {resetButton}
         <p>{value}</p>
+      {timer}
       </div>
     </div>
 
