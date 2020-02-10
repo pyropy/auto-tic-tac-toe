@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Timer from "./Timer";
-import GameContext from './contexts/GameContext';
+import GameContext from '../contexts/GameContext';
 
 const Cell = ({ index, onClickHook, value, winningCell }) => {
 

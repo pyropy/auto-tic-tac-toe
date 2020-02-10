@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import Cell from "./Cell";
-import calculateWinningCells from "./helpers";
+import calculateWinningCells from "../helpers";
 import GameContext from "../contexts/GameContext";
 import { human, robot } from "../common";
 import bestMove from "../robot";

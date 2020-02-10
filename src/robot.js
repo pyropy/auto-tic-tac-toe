@@ -1,4 +1,4 @@
-import calculateWinningCells, { findEmtpyCells } from "./helpers";
+import calculateWinningCells  from "./helpers";
 import { human, robot } from "./common";
 
 function bestMove(board) {
