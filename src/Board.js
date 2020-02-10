@@ -54,7 +54,6 @@ const Board = () => {
                 value={val}
                 winningCell={winningCells.includes(idx)}
                 onClickHook={onCellClick}
-                // resetGameHook={resetGame}
               />
             ))}
           </div>
