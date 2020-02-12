@@ -12,6 +12,7 @@ const Board = () => {
   const [gameEnded, setGameEnded] = useState(false);
   const [cells, setCells] = useState(Array(9).fill(null));
   const [gameStart, setGameStart] = useState(Date.now());
+  const [robotMoveTimeout, setRobotMoveTimeout] = useState(null);
 
   const resetGame = _ => {
     setCells([...Array(9).fill(null)]);
@@ -19,9 +20,17 @@ const Board = () => {
     setPlayerTurn(true);
     setWinningCells([...Array(3).fill(null)]);
     setGameStart(Date.now());
+    clearTimeout(robotMoveTimeout)
   };
 
-  const onMove = cellIndex => {
+
+  const handleClick = cellIndex => {
+      if (!isPlayerTurn) return;
+      handleMove(cellIndex)
+  }
+
+  // Handes single move for tic-tac-toe game 
+  const handleMove = cellIndex => {
     if (cells[cellIndex] || gameEnded) return;
 
     cells[cellIndex] = isPlayerTurn ? human : robot;
@@ -44,10 +53,11 @@ const Board = () => {
   };
 
   const handleRobotMove = () => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       const move = bestMove(cells);
-      onMove(move)
+      handleMove(move)
     }, 750);
+    setRobotMoveTimeout(timeout);
   };
 
   useEffect(() => {
@@ -72,7 +82,7 @@ const Board = () => {
               index={idx}
               value={val}
               winningCell={winningCells.includes(idx)}
-              onClickHook={onMove}
+              onClickHook={handleClick}
             />
           ))}
         </div>
